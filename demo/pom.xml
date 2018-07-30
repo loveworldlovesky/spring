@@ -25,6 +25,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- 核心模块，包括自动配置支持、日志和YAML -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -35,6 +36,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- 支持web的模块 -->
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	 	</dependency>
+	 	<!-- 热部署支持1.start1 -->
+ 	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	        <optional>true</optional>
+	    </dependency>
 	</dependencies>
 
 	<build>
@@ -42,6 +54,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- 热部署支持1.end1 -->
+				<configuration>
+	                <fork>true</fork>
+	            </configuration>
 			</plugin>
 		</plugins>
 	</build>
