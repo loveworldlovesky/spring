@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="mysql_demo">
+	<commentGenerator>
+		<property name="suppressDate" value="false" />
+		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.19.197:13379/mydemo"  driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+    <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false" />  
+    </javaTypeResolver>
+    <!-- 生成模型的包名和位置 --> 
+    <javaModelGenerator targetPackage="com.example.demo.seckill.product.domain" targetProject="demo" />
+    <!-- 生成的映射文件包名和位置 --> 
+    <sqlMapGenerator targetPackage="com.example.demo.seckill.product.dao" targetProject="demo" />
+    <!-- 生成DAO的包名和位置 --> 
+    <javaClientGenerator targetPackage="com.example.demo.seckill.product.dao" targetProject="demo" type="XMLMAPPER" />
+    <table tableName="product_seckill" domainObjectName="ProductSeckill" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />  
+    
+  </context>
+</generatorConfiguration>
