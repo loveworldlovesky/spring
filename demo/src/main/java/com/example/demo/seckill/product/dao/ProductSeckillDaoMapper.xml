@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.seckill.product.dao.ProductSeckillDao">
+  <resultMap id="BaseResultMap" type="com.example.demo.seckill.product.domain.ProductSeckill">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_num" jdbcType="VARCHAR" property="productNum" />
+    <result column="seckill_num" jdbcType="INTEGER" property="seckillNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, product_name, product_num, seckill_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_seckill
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_seckill
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <!--  useGeneratedKeys="true" keyProperty="id" -->
+  <insert id="insert" parameterType="com.example.demo.seckill.product.domain.ProductSeckill">
+    insert into product_seckill ( product_name, product_num, 
+      seckill_num)
+    values ( #{productName,jdbcType=VARCHAR}, #{productNum,jdbcType=VARCHAR}, 
+      #{seckillNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.seckill.product.domain.ProductSeckill">
+    insert into product_seckill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productNum != null">
+        product_num,
+      </if>
+      <if test="seckillNum != null">
+        seckill_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNum != null">
+        #{productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="seckillNum != null">
+        #{seckillNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.seckill.product.domain.ProductSeckill">
+    update product_seckill
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNum != null">
+        product_num = #{productNum,jdbcType=VARCHAR},
+      </if>
+      <if test="seckillNum != null">
+        seckill_num = #{seckillNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.seckill.product.domain.ProductSeckill">
+    update product_seckill
+    set product_name = #{productName,jdbcType=VARCHAR},
+      product_num = #{productNum,jdbcType=VARCHAR},
+      seckill_num = #{seckillNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getProductTotal" parameterType="string" resultType="Integer">
+  	select seckill_num from product_seckill where product_num = #{productNum}
+  </select>
+  <update id="reduce">
+  	update product_seckill set seckill_num = seckill_num-#{num} where product_num = #{productNum}
+  </update>
+  
+  
+</mapper>
